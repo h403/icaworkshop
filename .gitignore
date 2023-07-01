@@ -1,0 +1,15 @@
+*.synctex.gz
+*.aux
+*.toc
+*.bbl
+*.blg
+*.cut
+*.dvi
+*.fdb_latexmk
+*.fls
+*.log
+*.out
+*.xcp
+*_temp.tex
+code/.ipynb_checkpoints/
+code/__pycache__/
