@@ -245,28 +245,28 @@ def beamformer(rxx, a):
     y2 = (dot(a.T.conj(),rxx).T * a).sum(axis=0) / (a.conj() * a).sum(axis=0)
     return real(y2)
 
-def find_argpeaks(spc, n):
-    idx = scipy.signal.argrelmax(spc)[0]
-    val = np.array([spc[i] for i in idx])
-    return idx[val.argsort()[:-n-1:-1]]
+# def find_argpeaks(spc, n):
+#     idx = scipy.signal.argrelmax(spc)[0]
+#     val = np.array([spc[i] for i in idx])
+#     return idx[val.argsort()[:-n-1:-1]]
 
-def find_argpeak(func, xmin, xmid, xmax, cmax = 10, count=0):
-    rslt = xmid
-    ymin, ymid, ymax = func(xmin), func(xmid), func(xmax)
-    if ymin > ymid or ymax > ymid:
-        raise(ValueError, 'peak must be in open section (xmin:xmax).')
-    pmin, pmid, pmax =.5*(xmin+xmid), xmid, .5*(xmid+xmax)
-    qmin, qmid, qmax = func(pmin), ymid, func(pmax)
-    if count > cmax:
-        dgt = math.log10(pmax - pmin)
-        sig_dgt = -int((1 if dgt > 0 else -1) * (abs(dgt) - 1))
-        return round(pmid, sig_dgt) # , sig_dgt, count
-    if qmid < qmin and qmid < qmax:
-        raise(ValueError, 'two or more peaks detected in (xmin:xmax).')
-    elif qmid < qmin and qmid > qmax: # search in min side
-        rslt = find_argpeak(func, xmin, pmin, pmid, cmax = cmax, count=count+1)
-    elif qmid > qmin and qmid < qmax: # search in max side
-        rslt = find_argpeak(func, pmid, pmax, xmax, cmax = cmax, count=count+1)
-    elif qmid > qmin and qmid > qmax:
-        rslt = find_argpeak(func, pmin, pmid, pmax, cmax = cmax, count=count+1)
-    return rslt
+# def find_argpeak(func, xmin, xmid, xmax, cmax = 10, count=0):
+#     rslt = xmid
+#     ymin, ymid, ymax = func(xmin), func(xmid), func(xmax)
+#     if ymin > ymid or ymax > ymid:
+#         raise(ValueError, 'peak must be in open section (xmin:xmax).')
+#     pmin, pmid, pmax =.5*(xmin+xmid), xmid, .5*(xmid+xmax)
+#     qmin, qmid, qmax = func(pmin), ymid, func(pmax)
+#     if count > cmax:
+#         dgt = math.log10(pmax - pmin)
+#         sig_dgt = -int((1 if dgt > 0 else -1) * (abs(dgt) - 1))
+#         return round(pmid, sig_dgt) # , sig_dgt, count
+#     if qmid < qmin and qmid < qmax:
+#         raise(ValueError, 'two or more peaks detected in (xmin:xmax).')
+#     elif qmid < qmin and qmid > qmax: # search in min side
+#         rslt = find_argpeak(func, xmin, pmin, pmid, cmax = cmax, count=count+1)
+#     elif qmid > qmin and qmid < qmax: # search in max side
+#         rslt = find_argpeak(func, pmid, pmax, xmax, cmax = cmax, count=count+1)
+#     elif qmid > qmin and qmid > qmax:
+#         rslt = find_argpeak(func, pmin, pmid, pmax, cmax = cmax, count=count+1)
+#     return rslt
