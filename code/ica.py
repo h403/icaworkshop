@@ -7,7 +7,7 @@ Created on Mon Jun 27 17:42:11 2022
 """
 
 import numpy as np
-import scipy.signal
+# import scipy.signal
 import math
 
 from numpy import array, linspace, apply_along_axis
